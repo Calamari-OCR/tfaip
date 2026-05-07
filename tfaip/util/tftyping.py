@@ -33,6 +33,12 @@ except ImportError:
         import keras.src.engine.keras_tensor as kt
     except ImportError:
         AnyTensor = Union[tf.Tensor, KerasTensor]
+        try:
+            import tf_keras.src.engine.keras_tensor as kt
+        except ImportError:
+            AnyTensor = Union[tf.Tensor, KerasTensor]
+        else:
+            AnyTensor = Union[tf.Tensor, KerasTensor, kt.KerasTensor]
     else:
         AnyTensor = Union[tf.Tensor, KerasTensor, kt.KerasTensor]
 else:

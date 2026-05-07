@@ -35,12 +35,13 @@ from tfaip.device.device_config import DeviceConfig, distribute_strategy
 from tfaip.scenario.scenariobase import ScenarioBase
 from tfaip.trainer.callbacks.benchmark_callback import BenchmarkCallback
 from tfaip.trainer.callbacks.earlystopping.callback import EarlyStoppingCallback
-if version.parse(tf.__version__) >= version.parse("2.16.0"):
-    from keras.callbacks import SwapEMAWeights
-elif version.parse(tf.__version__) >= version.parse("2.11.0"):
+#if version.parse(tf.__version__) >= version.parse("2.16.0"):
+#    from keras.callbacks import SwapEMAWeights
+if version.parse(tf.__version__) >= version.parse("2.11.0"):
     # our backported version (as replacement for EMACallback)
     from tfaip.trainer.callbacks.swap_ema_weights import SwapEMAWeights
-from tfaip.trainer.callbacks.ema_callback import EMACallback
+if version.parse(tf.__version__) < version.parse("2.16.0"):
+    from tfaip.trainer.callbacks.ema_callback import EMACallback
 from tfaip.trainer.callbacks.extract_logs import ExtractLogsCallback
 from tfaip.trainer.callbacks.lav_callback import LAVCallback
 from tfaip.trainer.callbacks.logger_callback import LoggerCallback
@@ -48,7 +49,8 @@ from tfaip.trainer.callbacks.progbar import TFAIPProgbarLogger
 from tfaip.trainer.callbacks.tensor_board_callback import TensorBoardCallback
 from tfaip.trainer.callbacks.train_params_logger import TrainerCheckpointsCallback
 from tfaip.trainer.optimizer.gradient_accumulation_optimizer import create_gradient_accumulation_optimizer
-from tfaip.trainer.optimizer.weights_moving_average import WeightsMovingAverage
+if version.parse(tf.__version__) < version.parse("2.16.0"):
+    from tfaip.trainer.optimizer.weights_moving_average import WeightsMovingAverage
 from tfaip.trainer.scheduler.learningrate import LearningRateSchedule
 from tfaip.trainer.scheduler.schedule_weightdecay import WeightDecaySchedule
 from tfaip.trainer.warmstart.warmstarter import WarmStarter
@@ -433,7 +435,10 @@ class Trainer(Generic[TTrainerParams], ABC, metaclass=CollectGenericTypes):
                     args["weight_decay"] = WeightDecaySchedule(args["weight_decay"], lr_schedule)
 
             if ema_decay is not None and ema_decay != 0:
-                if (version.parse(tf.__version__) >= version.parse("2.11.0") and
+                #if (version.parse(tf.__version__) >= version.parse("2.11.0") and
+                if version.parse(tf.__version__) >= version.parse("2.16.0"):
+                    return real_optimizer, {"use_ema": True, "ema_momentum": ema_decay, **args}
+                elif (version.parse(tf.__version__) >= version.parse("2.11.0") and
                     not issubclass(real_optimizer, LegacyOptimizer)):
                     assert issubclass(real_optimizer, tf.keras.optimizers.Optimizer)
                     # only those optimizers still using tf.keras.optimizers.legacy classes are compatible with TFA
