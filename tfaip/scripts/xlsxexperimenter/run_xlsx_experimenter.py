@@ -183,6 +183,8 @@ class XLSXExperimenter:
             # skip group and param name rows
             if index < 2:
                 continue
+            if isinstance(row, pd.Series):
+                row = row.tolist()
             if not (isinstance(row[skip_idx], float) and np.isnan(row[skip_idx])):
                 print("Skipping: {}".format(row[id]))
                 continue
@@ -249,7 +251,7 @@ class XLSXExperimenter:
 
             sheet_name = "results " + timestamp
 
-            with ExcelWriter(self.xlsx_path, mode="a", if_sheet_exists="new") as writer:
+            with ExcelWriter(self.xlsx_path, engine='openpyxl', mode="a", if_sheet_exists="new") as writer:
                 df.to_excel(writer, sheet_name=sheet_name, index=False)
 
         else:

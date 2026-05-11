@@ -76,6 +76,8 @@ class TensorBoardCallback(TensorBoard):
 
         if isinstance(self.model.optimizer.lr, LearningRateSchedule):
             logs.update({"lr": K.eval(self.model.optimizer.lr(epoch * self.steps_per_epoch))})
+        else:
+            logs.update({"lr": self.model.optimizer.lr})
         if self.extracted_logs_cb:
             logs.update(self.extracted_logs_cb.extracted_logs)
 

@@ -47,7 +47,7 @@ if TYPE_CHECKING:
     from tfaip.model.modelbase import ModelBase
 
 
-if Version(tensorflow.version.VERSION) >= Version("2.6"):
+if Version("2.16") > Version(tensorflow.version.VERSION) >= Version("2.6"):
     from keras.callbacks import CallbackList
 else:
     from tensorflow.keras.callbacks import CallbackList

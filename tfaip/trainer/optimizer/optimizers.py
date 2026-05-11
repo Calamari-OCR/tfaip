@@ -80,7 +80,10 @@ class SGDOptimizer(OptimizerParams):
     def create(self):
         import tensorflow as tf  # pylint: disable = import-outside-toplevel
 
-        if version.parse(tf.__version__) >= version.parse("2.11.0"):
+        if version.parse(tf.__version__) >= version.parse("2.16.0"):
+            from tensorflow.keras.optimizers import SGD
+            SGDW = SGD
+        elif version.parse(tf.__version__) >= version.parse("2.11.0"):
             from tensorflow.keras.optimizers.legacy import SGD
             from tensorflow.keras.optimizers.experimental import SGD as SGDW
         else:
@@ -122,7 +125,9 @@ class AdamOptimizer(OptimizerParams):
         else:
             from tensorflow_addons.optimizers import AdamW
 
-        if version.parse(tf.__version__) >= version.parse("2.11.0"):
+        if version.parse(tf.__version__) >= version.parse("2.16.0"):
+            from tensorflow.keras.optimizers import Adam
+        elif version.parse(tf.__version__) >= version.parse("2.11.0"):
             from tensorflow.keras.optimizers.legacy import Adam
         else:
             from tensorflow.keras.optimizers import Adam
@@ -152,7 +157,7 @@ class AdamaxOptimizer(AdamOptimizer):
     def create(self):
         import tensorflow as tf  # pylint: disable = import-outside-toplevel
 
-        if version.parse(tf.__version__) >= version.parse("2.11.0"):
+        if version.parse("2.16.0") > version.parse(tf.__version__) >= version.parse("2.11.0"):
             from tensorflow.keras.optimizers.legacy import Adamax
         else:
             from tensorflow.keras.optimizers import Adamax
@@ -178,7 +183,7 @@ class RMSpropOptimizer(OptimizerParams):
     def create(self):
         import tensorflow as tf  # pylint: disable = import-outside-toplevel
 
-        if version.parse(tf.__version__) >= version.parse("2.11.0"):
+        if version.parse("2.16.0") > version.parse(tf.__version__) >= version.parse("2.11.0"):
             from tensorflow.keras.optimizers.legacy import RMSprop
         else:
             from tensorflow.keras.optimizers import RMSprop
@@ -209,6 +214,8 @@ class AdaBeliefOptimizer(OptimizerParams):
     min_lr: float = 0.0
 
     def create(self):
+        if version.parse(tf.__version__) >= version.parse("2.16.0"):
+            raise NotImplementedError("The AdaBelief optimizer is currently not implemented for tf-keras >= 2.16!")
         from adabelief_tf import AdaBeliefOptimizer as ABOpt  # pylint: disable = import-outside-toplevel
 
         return ABOpt, {
@@ -239,6 +246,8 @@ class LAMBOptimizer(OptimizerParams):
     exclude_from_layer_adaptation: Optional[List[str]] = None
 
     def create(self):
+        if version.parse(tf.__version__) >= version.parse("2.16.0"):
+            raise NotImplementedError("The LAMB optimizer is currently not implemented for tf-keras >= 2.16!")
         from tensorflow_addons.optimizers import LAMB  # pylint: disable = import-outside-toplevel
 
         return LAMB, {
@@ -248,5 +257,24 @@ class LAMBOptimizer(OptimizerParams):
             "weight_decay": self.weight_decay,
             "exclude_from_weight_decay": self.exclude_from_weight_decay,
             "exclude_from_layer_adaptation": self.exclude_from_layer_adaptation,
+            **self._clip_grad_args(),
+        }
+
+@pai_dataclass(alt="Lion")
+@dataclass
+class LionOptimizer(OptimizerParams):
+    """The LionOptimizer"""
+
+    beta_1: float = 0.9
+    beta_2: float = 0.99
+    weight_decay: float = 0.0
+
+    def create(self):
+        from tensorflow.keras.optimizers import Lion  # pylint: disable = import-outside-toplevel
+
+        return Lion, {
+            "beta_1": self.beta_1,
+            "beta_2": self.beta_2,
+            "weight_decay": self.weight_decay,
             **self._clip_grad_args(),
         }

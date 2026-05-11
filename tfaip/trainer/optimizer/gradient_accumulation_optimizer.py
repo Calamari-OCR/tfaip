@@ -46,7 +46,7 @@ def create_gradient_accumulation_optimizer(
 
     # noinspection PyAbstractClass
     # We know that the parent_optimizer must not be abstract and implements all methods
-    class GradientAccumulationOptimizer(parent_optimizer):
+    class GradientAccumulationLegacyOptimizer(parent_optimizer):
         """Wrapper of the actual optimizer to add gradient accumulation functionality"""
 
         def _create_slots(self, var_list):
@@ -77,5 +77,51 @@ def create_gradient_accumulation_optimizer(
             cond_op = tf.cond(cond, assign_op, update_op)
             with tf.control_dependencies([cond_op]):
                 return tf.group([cond_op, self._batch.assign_add(1)])
+    
+    # noinspection PyAbstractClass
+    # We know that the parent_optimizer must not be abstract and implements all methods
+    class GradientAccumulationOptimizer(parent_optimizer):
+        """Wrapper of the actual optimizer to add gradient accumulation functionality"""
 
-    return GradientAccumulationOptimizer(**optimizer)
+        def build(self, var_list):
+            super().build(var_list)
+            if hasattr(self, "_built") and self._built and hasattr(self, "_accumulation"):
+                return
+            self._accumulation = []
+            for var in var_list:
+                self._accumulation.append(
+                    self.add_variable_from_reference(
+                        model_variable=var, variable_name="accumulation"
+                    )    
+                )
+            self._built = True
+
+        def __init__(self, **kwargs):
+            super().__init__(**kwargs)
+            self._batch = tf.Variable(1, dtype="int64", name="train_accumulation_batch_step")
+
+        def _distributed_apply_gradients_fn(self, distribution, grads_and_vars, **kwargs):
+            cond = tf.equal(tf.math.floormod(self._batch, accum_steps), 0)
+
+            def update_op():
+                return tf.group([self._accumulation[self._index_dict[self._var_key(v)]].assign_add(g) for g, v in grads_and_vars])
+
+            def assign_op():
+                gvs = [((g + self._accumulation[self._index_dict[self._var_key(v)]]) / accum_steps, v) for g, v in grads_and_vars]
+                # This super call in python2 style is required here! pylint: disable=super-with-arguments
+                op = super(GradientAccumulationOptimizer, self)._distributed_apply_gradients_fn(distribution, gvs, **kwargs)
+                with tf.control_dependencies([op]):
+                    clear_op = tf.group(
+                        [self._accumulation[self._index_dict[self._var_key(v)]].assign(tf.zeros(tf.shape(v))) for _, v in grads_and_vars]
+                    )
+                return tf.group([op, clear_op])
+
+            cond_op = tf.cond(cond, assign_op, update_op)
+            with tf.control_dependencies([cond_op]):
+                return tf.group([cond_op, self._batch.assign_add(1)])
+
+    if hasattr(parent_optimizer, '_distributed_apply'):
+        return GradientAccumulationLegacyOptimizer(**optimizer)
+    else:
+        assert hasattr(parent_optimizer, '_distributed_apply_gradients_fn')
+        return GradientAccumulationOptimizer(**optimizer)

@@ -19,6 +19,7 @@ import json
 import logging
 import os
 from argparse import Action
+from packaging import version
 
 from tfaip import DataGeneratorParams
 from tfaip.lav.callbacks.dump_results import DumpResultsCallback
@@ -34,10 +35,11 @@ def run():
 
 def main(args, scenario_meta, scenario_params):
     import tensorflow as tf
-    import tensorflow_addons as tfa
+    if version.parse(tf.__version__) < version.parse("2.16.0"):
+        import tensorflow_addons as tfa
 
-    print(tf.__version__, tfa.__version__, tfa._check_tf_version())
-    tfa.register_all()
+        print(tf.__version__, tfa.__version__, tfa._check_tf_version())
+        tfa.register_all()
 
     callbacks = []
     if args.dump:

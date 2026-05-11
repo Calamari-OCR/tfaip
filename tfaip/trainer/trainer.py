@@ -486,7 +486,7 @@ class Trainer(Generic[TTrainerParams], ABC, metaclass=CollectGenericTypes):
         # additional outputs
         # rename outputs and operations
         tf.identity(optimizer.iterations, name="global_step")
-        tf.identity(optimizer.lr(optimizer.iterations), name="learning_rate")
+        tf.identity(optimizer.lr(optimizer.iterations) if callable(optimizer.lr) else optimizer.lr, name="learning_rate")
         train_op = tf.group([train_op], name="train_op")
         loss_value = tf.identity(loss_value, name="loss_value")
         if isinstance(outputs, dict):
