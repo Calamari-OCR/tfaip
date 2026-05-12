@@ -19,6 +19,7 @@
 
 The TFAIPArgumentParser is a PAIArgumentParser but allows to drop "Params" suffixes when selecting classes.
 """
+
 from dataclasses import is_dataclass
 from typing import Type, List
 

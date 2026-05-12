@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of GraphBase"""
+
 import logging
 from abc import ABC, abstractmethod
 from typing import TypeVar, TYPE_CHECKING

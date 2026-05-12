@@ -22,7 +22,6 @@ import tensorflow as tf
 
 from tfaip.util.math.shape_utils import combined_static_and_dynamic_shape as to_shape
 
-
 # def is_packable(array, dtype):
 #     if t is None:
 #         raise Exception(f"unknown type, use one of {len_dict.keys()}")

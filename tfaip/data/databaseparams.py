@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of DataBaseParams, DataPipelineParams, and DataGeneratorParams"""
+
 import logging
 import os
 from abc import ABC, abstractmethod

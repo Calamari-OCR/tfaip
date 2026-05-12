@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Implementation of LAV"""
+
 import logging
 import os
 from abc import ABC

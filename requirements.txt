@@ -11,10 +11,10 @@ pillow
 prettytable
 python-Levenshtein
 scikit-image
-pooch==1.4.0
+pooch
 tf_keras
 #tensorflow>=2.4.0 # ,<2.16.0
 #tensorflow_addons>=0.12.0  # must be compatible with tensorflow version
 tqdm
 typeguard
-xlrd==1.2.0
+xlrd

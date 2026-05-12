@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Helpers to load and mix list files"""
+
 import logging
 import os
 from dataclasses import dataclass

@@ -24,7 +24,6 @@ from typing import List
 from tfaip.util.math.key_helper import KeyHelper
 from tfaip.util.math.iter_helpers import ListIterablor
 
-
 logger = logging.getLogger(__name__)
 
 

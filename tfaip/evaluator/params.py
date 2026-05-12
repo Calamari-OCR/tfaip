@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the base parameters for the EvaluatorBase"""
+
 from dataclasses import dataclass
 
 from paiargparse import pai_dataclass

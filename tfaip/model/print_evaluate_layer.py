@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the PrintEvaluateLayer"""
+
 import json
 import logging
 from typing import TYPE_CHECKING, List, NamedTuple, Any

@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the TrainerParams and the TrainerPipelineParamsBase"""
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Optional, Union, TypeVar, Generic, Iterable, TYPE_CHECKING, List

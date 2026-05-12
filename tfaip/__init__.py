@@ -20,10 +20,16 @@
 The global imports import static classes such as parameters and definitions.
 The other classes can be imported from ``tfaip.imports``
 """
+
 from tfaip.version import __version__
 
 # JAVA-Training: export graph mode
 EXPORT_TENSORFLOW_1 = {"metric_aggregation": None}
+
+# Use Keras 2
+import os
+
+os.environ["TF_USE_LEGACY_KERAS"] = os.environ.get("TF_USE_LEGACY_KERAS", "1")
 
 # IMPORTANT!!!
 # Global imports here must not import tensorflow (it won't crash but it is slow)

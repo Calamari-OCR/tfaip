@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Imports of all Schedules and definition of the DEFAULT_SCHEDULES"""
+
 from tfaip.trainer.scheduler.constant_params import Constant
 from tfaip.trainer.scheduler.exponential_decay_params import ExponentialDecayParams
 from tfaip.trainer.scheduler.cosine_decay_params import (

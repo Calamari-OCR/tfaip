@@ -19,6 +19,7 @@
 
 that can be used to define additional metrics computed during LAV.
 """
+
 from typing import Dict, TypeVar, Generic, Type, NoReturn
 
 from tfaip import Sample

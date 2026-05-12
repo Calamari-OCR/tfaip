@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """A pool of processes derived from multiprocessing.Pool with a custom worker function"""
+
 import logging
 import multiprocessing
 import sys

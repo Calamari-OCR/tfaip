@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the ExponentialDecayParams"""
+
 from dataclasses import dataclass, field
 
 from paiargparse import pai_dataclass, pai_meta

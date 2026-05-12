@@ -32,6 +32,7 @@ with ProfileScope("my_scope_name"):
 
 At some point at the code call `print_profiling`
 """
+
 import os
 import time
 from functools import wraps

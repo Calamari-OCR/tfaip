@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License along with
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
-"""Definition of the LAVCallback
-"""
+"""Definition of the LAVCallback"""
+
 import logging
 import os
 import time

@@ -32,6 +32,7 @@ Alternatives:
     - TSVGeneratorParams for tab separated files ("\t")
     - SCSVGeneratorParams for semi colon separated files (";")
 """
+
 import itertools
 import logging
 import multiprocessing

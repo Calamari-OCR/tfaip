@@ -20,6 +20,7 @@
 This is for example required for S2S-setups where training is performed with teacher forcing
 and prediction with beam search decoding (or best path).
 """
+
 from dataclasses import dataclass
 
 from paiargparse import pai_dataclass

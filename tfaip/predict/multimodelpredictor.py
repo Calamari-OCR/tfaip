@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the MultiModelPredictor"""
+
 import json
 import os
 from abc import abstractmethod, ABC

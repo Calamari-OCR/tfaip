@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Functionality to implement an exponential moving average on validation weights"""
+
 import tensorflow as tf
 import tensorflow_addons.optimizers as addons_optimizer
 

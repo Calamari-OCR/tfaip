@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the LearningRateParams"""
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 

@@ -16,10 +16,10 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the LoggerCallback"""
+
 from tensorflow.keras.callbacks import Callback
 import logging
 import numpy as np
-
 
 logger = logging.getLogger(__name__)
 

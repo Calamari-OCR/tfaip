@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the Trainer"""
+
 import json
 import logging
 import os
@@ -35,7 +36,8 @@ from tfaip.device.device_config import DeviceConfig, distribute_strategy
 from tfaip.scenario.scenariobase import ScenarioBase
 from tfaip.trainer.callbacks.benchmark_callback import BenchmarkCallback
 from tfaip.trainer.callbacks.earlystopping.callback import EarlyStoppingCallback
-#if version.parse(tf.__version__) >= version.parse("2.16.0"):
+
+# if version.parse(tf.__version__) >= version.parse("2.16.0"):
 #    from keras.callbacks import SwapEMAWeights
 if version.parse(tf.__version__) >= version.parse("2.11.0"):
     # our backported version (as replacement for EMACallback)
@@ -49,6 +51,7 @@ from tfaip.trainer.callbacks.progbar import TFAIPProgbarLogger
 from tfaip.trainer.callbacks.tensor_board_callback import TensorBoardCallback
 from tfaip.trainer.callbacks.train_params_logger import TrainerCheckpointsCallback
 from tfaip.trainer.optimizer.gradient_accumulation_optimizer import create_gradient_accumulation_optimizer
+
 if version.parse(tf.__version__) < version.parse("2.16.0"):
     from tfaip.trainer.optimizer.weights_moving_average import WeightsMovingAverage
 from tfaip.trainer.scheduler.learningrate import LearningRateSchedule
@@ -72,11 +75,14 @@ if version.parse(tf.__version__) == version.parse("2.6.0"):
     setattr(keras.engine.training, "write_scalar_summaries", write_scalar_summaries)
 
 from tensorflow.keras.optimizers import Optimizer
+
 if version.parse(tf.__version__) >= version.parse("2.11.0"):
     from tensorflow.keras.optimizers.legacy import Optimizer as LegacyOptimizer
+
     Optimizer = Union[Optimizer, LegacyOptimizer]
 elif version.parse(tf.__version__) >= version.parse("2.9.0"):
     from tensorflow.keras.optimizers.experimental import Optimizer as ExperimentalOptimizer
+
     Optimizer = Union[Optimizer, ExperimentalOptimizer]
 
 logger = logging.getLogger(__name__)
@@ -298,8 +304,7 @@ class Trainer(Generic[TTrainerParams], ABC, metaclass=CollectGenericTypes):
         if self._params.ema_decay != 0.0:
             # EMA must be before export best to export ema
             # noinspection PyTypeChecker
-            if (version.parse(tf.__version__) >= version.parse("2.11.0") and
-                not isinstance(optimizer, LegacyOptimizer)):
+            if version.parse(tf.__version__) >= version.parse("2.11.0") and not isinstance(optimizer, LegacyOptimizer):
                 # see _create_optimizer why we cannot use TFA EMA
                 callbacks.append(SwapEMAWeights(swap_on_epoch=True))
             else:
@@ -428,18 +433,22 @@ class Trainer(Generic[TTrainerParams], ABC, metaclass=CollectGenericTypes):
             lr_schedule = self._params.learning_rate.create()
             args["learning_rate"] = lr_schedule
             if "weight_decay" in args:
-                if (isinstance(lr_schedule, LearningRateSchedule) and
+                if (
+                    isinstance(lr_schedule, LearningRateSchedule)
+                    and
                     # only applies to decoupled weight regularization
                     # (in normal regularization LR decay applies via gradient)
-                    hasattr(real_optimizer, "_decay_weights_op")):
+                    hasattr(real_optimizer, "_decay_weights_op")
+                ):
                     args["weight_decay"] = WeightDecaySchedule(args["weight_decay"], lr_schedule)
 
             if ema_decay is not None and ema_decay != 0:
-                #if (version.parse(tf.__version__) >= version.parse("2.11.0") and
+                # if (version.parse(tf.__version__) >= version.parse("2.11.0") and
                 if version.parse(tf.__version__) >= version.parse("2.16.0"):
                     return real_optimizer, {"use_ema": True, "ema_momentum": ema_decay, **args}
-                elif (version.parse(tf.__version__) >= version.parse("2.11.0") and
-                    not issubclass(real_optimizer, LegacyOptimizer)):
+                elif version.parse(tf.__version__) >= version.parse("2.11.0") and not issubclass(
+                    real_optimizer, LegacyOptimizer
+                ):
                     assert issubclass(real_optimizer, tf.keras.optimizers.Optimizer)
                     # only those optimizers still using tf.keras.optimizers.legacy classes are compatible with TFA
                     # so instead replace TFA MovingAverage (weight_decay) with new TF-Keras use_ema (ema_momentum)
@@ -486,7 +495,9 @@ class Trainer(Generic[TTrainerParams], ABC, metaclass=CollectGenericTypes):
         # additional outputs
         # rename outputs and operations
         tf.identity(optimizer.iterations, name="global_step")
-        tf.identity(optimizer.lr(optimizer.iterations) if callable(optimizer.lr) else optimizer.lr, name="learning_rate")
+        tf.identity(
+            optimizer.lr(optimizer.iterations) if callable(optimizer.lr) else optimizer.lr, name="learning_rate"
+        )
         train_op = tf.group([train_op], name="train_op")
         loss_value = tf.identity(loss_value, name="loss_value")
         if isinstance(outputs, dict):

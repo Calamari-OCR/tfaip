@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the ListFileDataGenerator"""
+
 import logging
 from random import Random
 from typing import Iterable

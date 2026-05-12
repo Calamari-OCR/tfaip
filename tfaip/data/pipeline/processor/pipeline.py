@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Implementation of the actual pipelines that run the DataProcessors optionally in parallel"""
+
 import logging
 from functools import partial
 from typing import List, Iterable, TYPE_CHECKING, Union, Optional

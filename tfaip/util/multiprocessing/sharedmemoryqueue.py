@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU General Public License along with
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
-""" Definition of a shared memory queue for (numeric) numpy arrays
+"""Definition of a shared memory queue for (numeric) numpy arrays
 
 The queue will store numpy arrays in shared memory instead of pickling them (which is 5 times slower).
 """
+
 import multiprocessing
 from typing import NamedTuple, List, Any
 

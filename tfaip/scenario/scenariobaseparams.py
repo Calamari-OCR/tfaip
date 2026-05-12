@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the ScenarioBaseParams"""
+
 import importlib
 from abc import ABC
 from dataclasses import dataclass, field

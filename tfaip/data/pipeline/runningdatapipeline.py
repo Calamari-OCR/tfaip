@@ -19,6 +19,7 @@
 
 The classes ensure that created processes get cleaned up by enforcing `with`-clauses.
 """
+
 import itertools
 import json
 from types import GeneratorType

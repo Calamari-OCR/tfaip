@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the ExponentialDecaySchedule"""
+
 from tensorflow import keras
 
 from tfaip.trainer.scheduler import ExponentialDecayParams

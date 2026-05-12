@@ -19,6 +19,7 @@
 
 Included are the definition of its derived SequentialProcessorPipelineParams and ComposedProcessorPipelineParams.
 """
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import List, TYPE_CHECKING, TypeVar, Type

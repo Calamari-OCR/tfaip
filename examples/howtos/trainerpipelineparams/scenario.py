@@ -19,6 +19,7 @@
 
 This example shows how to share parameters between a train and val data generator.
 """
+
 from dataclasses import dataclass
 from typing import Dict, Type, Iterable, Union, List, Optional
 

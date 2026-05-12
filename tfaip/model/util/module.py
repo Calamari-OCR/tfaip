@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Utility function to automatically find Graphs of a scenario"""
+
 import importlib
 import inspect
 import pkgutil

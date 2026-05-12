@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Utilities to handle randomness"""
+
 import logging
 
 logger = logging.getLogger(__name__)

@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of derived types and type checking"""
+
 import inspect
 import typing as typing_native
 from collections import OrderedDict

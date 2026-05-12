@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of a ListFileScenario"""
+
 from tfaip.scenario.listfile.listfilelav import ListFileLAV
 from tfaip.scenario.listfile.params import ListFileTrainerPipelineParams
 from tfaip.scenario.scenariobase import ScenarioBase, TScenarioParams

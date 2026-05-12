@@ -19,6 +19,7 @@
 
 The device config sets up the GPUs to use for training.
 """
+
 import logging
 import os
 from dataclasses import dataclass, field

@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Utils for versioning of the code"""
+
 import logging
 from typing import Optional
 import os

@@ -21,6 +21,7 @@ Usage:
     Call ``self.add_tensorboard`` of ``TFAIPLayer`` which expects ``TensorboardWriter`` and a Tensor as input.
     The ``TensorboardWriter`` expects a function as parameter which must write the data to the Tensorboard.
 """
+
 from typing import Optional, List, Callable
 
 import numpy as np

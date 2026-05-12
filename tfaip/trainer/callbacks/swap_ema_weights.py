@@ -1,8 +1,8 @@
 # stripped from TF 2.16 / Keras 3 and reduced
 # to work with public API of TF<2.16 / Keras 2
 
-#import tensorflow as tf
-#from keras.src import backend
+# import tensorflow as tf
+# from keras.src import backend
 from tensorflow.keras.callbacks import Callback
 
 
@@ -58,9 +58,9 @@ class SwapEMAWeights(Callback):
             self.model.trainable_variables,
             optimizer._model_variables_moving_average,
         ):
-            #if isinstance(var, backend.Variable):
+            # if isinstance(var, backend.Variable):
             #    var = var.value
-            #if isinstance(average_var, backend.Variable):
+            # if isinstance(average_var, backend.Variable):
             #    average_var = average_var.value
             # swap using addition to prevent variable creation
             optimizer._distribution_strategy.extended.update(
@@ -84,9 +84,9 @@ class SwapEMAWeights(Callback):
             self.model.trainable_variables,
             optimizer._model_variables_moving_average,
         ):
-            #if isinstance(var, backend.Variable):
+            # if isinstance(var, backend.Variable):
             #    var = var.value
-            #if isinstance(average_var, backend.Variable):
+            # if isinstance(average_var, backend.Variable):
             #    average_var = average_var.value
             optimizer._distribution_strategy.extended.update(
                 average_var,

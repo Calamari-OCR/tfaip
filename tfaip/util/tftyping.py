@@ -21,6 +21,7 @@ Note: typing and tf-typing are split so that tensorflow is only imported in this
 This is required so that the data pipeline (Data, DataProcessors, ...) can import typing without importing tensorflow.
 
 """
+
 from typing import Union
 
 import tensorflow as tf

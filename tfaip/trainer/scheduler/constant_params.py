@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the Constant learning rate schedule"""
+
 from dataclasses import dataclass
 
 from paiargparse import pai_dataclass

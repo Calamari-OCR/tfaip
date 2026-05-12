@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of a multiprocessing Pool for running generators in parallel"""
+
 import threading
 import time
 import logging

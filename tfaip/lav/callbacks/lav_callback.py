@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Implementation of a general LAVCallback"""
+
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 

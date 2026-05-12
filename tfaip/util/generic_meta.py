@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of Meta-Classes used to determine Generics of a class"""
+
 from abc import ABCMeta
 from typing import TypeVar, List, Any, Dict
 

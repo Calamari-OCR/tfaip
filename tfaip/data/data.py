@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License along with
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
-"""Module that defines DataBase
-"""
+"""Module that defines DataBase"""
+
 import logging
 from abc import ABC, abstractmethod
 from typing import Type, Dict, Optional, TypeVar, Generic, Callable

@@ -20,6 +20,7 @@
 The DataProcessorParams create their corresponding DataProcessor
 (either MappingDataProcessor or GeneratingDataProcessor).
 """
+
 import logging
 from abc import ABC, abstractmethod, ABCMeta
 from dataclasses import dataclass, field

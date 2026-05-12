@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Setup for GradientAccumulation"""
+
 from typing import Type, Union
 from packaging import version
 
@@ -25,13 +26,16 @@ from typeguard import typechecked
 K = tf.keras.backend
 
 from tensorflow.keras.optimizers import Optimizer
+
 TOptimizer = Type[Optimizer]
 if version.parse(tf.__version__) >= version.parse("2.11.0"):
     from tensorflow.keras.optimizers.legacy import Optimizer as LegacyOptimizer
+
     Optimizer = Union[Optimizer, LegacyOptimizer]
     TOptimizer = Type[Optimizer]
 elif version.parse(tf.__version__) >= version.parse("2.9.0"):
     from tensorflow.keras.optimizers.experimental import Optimizer as ExperimentalOptimizer
+
     Optimizer = Union[Optimizer, ExperimentalOptimizer]
     TOptimizer = Type[Optimizer]
 
@@ -77,7 +81,7 @@ def create_gradient_accumulation_optimizer(
             cond_op = tf.cond(cond, assign_op, update_op)
             with tf.control_dependencies([cond_op]):
                 return tf.group([cond_op, self._batch.assign_add(1)])
-    
+
     # noinspection PyAbstractClass
     # We know that the parent_optimizer must not be abstract and implements all methods
     class GradientAccumulationOptimizer(parent_optimizer):
@@ -90,9 +94,7 @@ def create_gradient_accumulation_optimizer(
             self._accumulation = []
             for var in var_list:
                 self._accumulation.append(
-                    self.add_variable_from_reference(
-                        model_variable=var, variable_name="accumulation"
-                    )    
+                    self.add_variable_from_reference(model_variable=var, variable_name="accumulation")
                 )
             self._built = True
 
@@ -104,15 +106,25 @@ def create_gradient_accumulation_optimizer(
             cond = tf.equal(tf.math.floormod(self._batch, accum_steps), 0)
 
             def update_op():
-                return tf.group([self._accumulation[self._index_dict[self._var_key(v)]].assign_add(g) for g, v in grads_and_vars])
+                return tf.group(
+                    [self._accumulation[self._index_dict[self._var_key(v)]].assign_add(g) for g, v in grads_and_vars]
+                )
 
             def assign_op():
-                gvs = [((g + self._accumulation[self._index_dict[self._var_key(v)]]) / accum_steps, v) for g, v in grads_and_vars]
+                gvs = [
+                    ((g + self._accumulation[self._index_dict[self._var_key(v)]]) / accum_steps, v)
+                    for g, v in grads_and_vars
+                ]
                 # This super call in python2 style is required here! pylint: disable=super-with-arguments
-                op = super(GradientAccumulationOptimizer, self)._distributed_apply_gradients_fn(distribution, gvs, **kwargs)
+                op = super(GradientAccumulationOptimizer, self)._distributed_apply_gradients_fn(
+                    distribution, gvs, **kwargs
+                )
                 with tf.control_dependencies([op]):
                     clear_op = tf.group(
-                        [self._accumulation[self._index_dict[self._var_key(v)]].assign(tf.zeros(tf.shape(v))) for _, v in grads_and_vars]
+                        [
+                            self._accumulation[self._index_dict[self._var_key(v)]].assign(tf.zeros(tf.shape(v)))
+                            for _, v in grads_and_vars
+                        ]
                     )
                 return tf.group([op, clear_op])
 
@@ -120,8 +132,8 @@ def create_gradient_accumulation_optimizer(
             with tf.control_dependencies([cond_op]):
                 return tf.group([cond_op, self._batch.assign_add(1)])
 
-    if hasattr(parent_optimizer, '_distributed_apply'):
+    if hasattr(parent_optimizer, "_distributed_apply"):
         return GradientAccumulationLegacyOptimizer(**optimizer)
     else:
-        assert hasattr(parent_optimizer, '_distributed_apply_gradients_fn')
+        assert hasattr(parent_optimizer, "_distributed_apply_gradients_fn")
         return GradientAccumulationOptimizer(**optimizer)

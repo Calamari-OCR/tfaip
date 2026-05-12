@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of a Joinable and a JoinableHolder"""
+
 from abc import ABC, abstractmethod
 from typing import List
 

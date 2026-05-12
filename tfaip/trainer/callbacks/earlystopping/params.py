@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the EarlyStoppingParams"""
+
 from dataclasses import dataclass, field
 from typing import Optional
 

@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the TrainParamsLogger"""
+
 import json
 import logging
 import os

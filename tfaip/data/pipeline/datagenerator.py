@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the DataGenerator"""
+
 from abc import ABC, abstractmethod
 from random import shuffle
 from typing import Iterable, List, TypeVar, Generic, Union

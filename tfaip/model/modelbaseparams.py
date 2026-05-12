@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the ModelBaseParams"""
+
 from abc import abstractmethod
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Type

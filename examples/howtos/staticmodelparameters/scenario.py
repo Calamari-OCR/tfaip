@@ -19,6 +19,7 @@
 
 This example shows how to share parameters between a train and val data generator.
 """
+
 from dataclasses import dataclass
 from typing import Dict, Type, Any
 
@@ -35,7 +36,6 @@ from tfaip.model.graphbase import GraphBase
 from tfaip.model.modelbase import ModelBase
 from tfaip.scenario.listfile.listfilescenario import ListFileScenario
 from tfaip.util.tftyping import AnyTensor
-
 
 # =====================================================
 # Model and Graph definition

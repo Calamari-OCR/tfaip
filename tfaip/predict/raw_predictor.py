@@ -23,6 +23,7 @@ Usage:
 See Also:
     `PredictorBase.raw`
 """
+
 import logging
 from contextlib import ExitStack
 from queue import Queue

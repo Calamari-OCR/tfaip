@@ -19,6 +19,7 @@
 
 In custom tests, call ``set_test_init`` in the root ``__init__.py`` of the tests (not the root dir of the project!)
 """
+
 import os
 
 import tfaip.util.logging as logging

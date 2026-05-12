@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the PredictorBase"""
+
 import logging
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Type, Iterable, Union, Optional, Any
@@ -25,11 +26,14 @@ from tensorflow import keras
 import tensorflow as tf
 
 from tensorflow.python.keras.engine import data_adapter
+
 if version.parse(tf.__version__) >= version.parse("2.13.0"):
     # fix TF#61204
     def is_distributed_dataset(ds):
         from tensorflow.python.types.distribute import DistributedDatasetInterface
+
         return isinstance(ds, DistributedDatasetInterface)
+
     data_adapter._is_distributed_dataset = is_distributed_dataset
 
 from tfaip.data.databaseparams import DataGeneratorParams, DataPipelineParams

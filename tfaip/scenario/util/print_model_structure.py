@@ -19,6 +19,7 @@
 
 Call: `print_all_layers(keras.Model)`
 """
+
 from typing import NamedTuple, List, Any
 import tensorflow as tf
 import numpy as np
@@ -128,7 +129,7 @@ def print_layer_summary(layer, layer_name, full_layer_name, positions, print_fn,
     if is_last[-1]:
         s = "\u2514"
     else:
-        s = "\u251C"
+        s = "\u251c"
 
     prefix = ""
     for b in is_last[:-1]:
@@ -160,7 +161,7 @@ def print_layer_summary(layer, layer_name, full_layer_name, positions, print_fn,
                 if weight_idx == (num_weights - 1):
                     ssub = "\u2514"
                 else:
-                    ssub = "\u251C"
+                    ssub = "\u251c"
 
                 weight_size = np.size(weight)
 

@@ -21,6 +21,7 @@ This script is similar to `tfaip-train` since the arguments are identical. There
 just replace `tfaip-train` with `tfaip-benchmark-scenario-input-pipeline`.
 
 """
+
 import logging
 import sys
 from argparse import Action

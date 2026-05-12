@@ -35,6 +35,7 @@ def run():
 
 def main(args, scenario_meta, scenario_params):
     import tensorflow as tf
+
     if version.parse(tf.__version__) < version.parse("2.16.0"):
         import tensorflow_addons as tfa
 

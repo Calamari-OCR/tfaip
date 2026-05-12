@@ -251,7 +251,7 @@ class XLSXExperimenter:
 
             sheet_name = "results " + timestamp
 
-            with ExcelWriter(self.xlsx_path, engine='openpyxl', mode="a", if_sheet_exists="new") as writer:
+            with ExcelWriter(self.xlsx_path, engine="openpyxl", mode="a", if_sheet_exists="new") as writer:
                 df.to_excel(writer, sheet_name=sheet_name, index=False)
 
         else:

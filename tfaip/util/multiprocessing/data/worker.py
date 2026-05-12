@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of a DataWorker that is run in parallel in a multiprocessing setup"""
+
 from abc import ABC, abstractmethod
 
 

@@ -32,7 +32,6 @@ from tfaip import ModelBaseParams
 from tfaip.model.graphbase import GraphBase
 from tfaip.model.layerbase import LayerBaseParams, LayerBase
 
-
 # ===============================================
 # My Layer, the basic class, can also be abstract!
 # Define base params that must be implemented by each child, create a new TypeVar and use it in `MyLayer`

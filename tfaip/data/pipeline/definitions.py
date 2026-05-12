@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """General definitions for the Pipeline: PipelineMode, Sample"""
+
 from typing import Any, Optional
 
 from tfaip.util.enum import StrEnum

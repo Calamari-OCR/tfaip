@@ -16,13 +16,13 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the EMACallback"""
+
 from tensorflow.keras.callbacks import Callback
 import logging
 
 from typeguard import typechecked
 
 from tfaip.trainer.optimizer.weights_moving_average import WeightsMovingAverage
-
 
 logger = logging.getLogger(__name__)
 

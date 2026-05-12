@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definitions of the workers for DataProcessors that are actually run in a separate process"""
+
 from typing import TYPE_CHECKING, Callable, Optional, Iterator
 
 from tfaip import PipelineMode, Sample

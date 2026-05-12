@@ -21,6 +21,7 @@ Extend both LayerBaseParams, and the LayerBase, whereby the LayerBaseParams crea
 Use the LayerBaseParams in the ModelParams, and instantiate the actual LayerBase by calling LayerBaseParams.create().
 This will create the LayerBase based on the actual replaceable params that are defined.
 """
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Type, TypeVar, Generic

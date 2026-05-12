@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Helper to implement a true parallel tf.data.Dataset.map with python functions"""
+
 from functools import partial
 
 from tfaip.util.multiprocessing.data.pipeline import ParallelPipeline

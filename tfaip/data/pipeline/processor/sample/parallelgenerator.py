@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Parallel implementation to apply a GenerationDataProcessor"""
+
 import itertools
 from functools import partial
 from typing import Callable, TYPE_CHECKING, Iterable, Optional

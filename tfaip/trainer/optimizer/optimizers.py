@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the various Optimizers and their OptimizerParams"""
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Tuple, Any, Dict, Type, TYPE_CHECKING, Union, Optional, List
@@ -28,12 +29,15 @@ if TYPE_CHECKING:
     import tensorflow as tf
 
     from tensorflow.keras.optimizers import Optimizer
+
     TOptimizer = Type[Optimizer]
     if version.parse(tf.__version__) >= version.parse("2.11.0"):
         from tensorflow.keras.optimizers.legacy import Optimizer as LegacyOptimizer
+
         TOptimizer = Type[Union[Optimizer, LegacyOptimizer]]
     elif version.parse(tf.__version__) >= version.parse("2.9.0"):
         from tensorflow.keras.optimizers.experimental import Optimizer as ExperimentalOptimizer
+
         TOptimizer = Type[Union[Optimizer, ExperimentalOptimizer]]
 
 
@@ -82,6 +86,7 @@ class SGDOptimizer(OptimizerParams):
 
         if version.parse(tf.__version__) >= version.parse("2.16.0"):
             from tensorflow.keras.optimizers import SGD
+
             SGDW = SGD
         elif version.parse(tf.__version__) >= version.parse("2.11.0"):
             from tensorflow.keras.optimizers.legacy import SGD
@@ -259,6 +264,7 @@ class LAMBOptimizer(OptimizerParams):
             "exclude_from_layer_adaptation": self.exclude_from_layer_adaptation,
             **self._clip_grad_args(),
         }
+
 
 @pai_dataclass(alt="Lion")
 @dataclass

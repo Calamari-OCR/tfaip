@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Implementation of MultiLAV"""
+
 import json
 from abc import ABC
 from typing import Type, List

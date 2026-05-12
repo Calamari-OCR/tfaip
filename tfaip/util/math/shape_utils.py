@@ -17,6 +17,7 @@
 # ==============================================================================
 
 """Utils used to manipulate tensor shapes."""
+
 import logging
 
 import tensorflow as tf

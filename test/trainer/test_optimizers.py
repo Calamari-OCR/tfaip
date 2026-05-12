@@ -31,10 +31,11 @@ from tfaip.trainer.optimizer.optimizers import (
     RMSpropOptimizer,
     AdaBeliefOptimizer,
     LAMBOptimizer,
-    LionOptimizer
+    LionOptimizer,
 )
 
 TF_216 = version.parse(tf.__version__) >= version.parse("2.16.0")
+
 
 class ScenarioTest(TutorialScenarioTest):
     @classmethod
@@ -102,24 +103,23 @@ class TestOptimizers(unittest.TestCase):
     @unittest.skipIf(TF_216, "Optimizer not implemented")
     def test_adabelief_optimizer(self):
         self.run_for_optimizer(AdaBeliefOptimizer())
-    
+
     @unittest.skipIf(TF_216, "Optimizer not implemented")
     def test_adabelief_optimizer_ema(self):
         self.run_for_optimizer(AdaBeliefOptimizer(), ema=True)
-    
+
     @unittest.skipIf(TF_216, "Optimizer not implemented")
     def test_lamb_optimizer(self):
         self.run_for_optimizer(LAMBOptimizer())
-    
+
     @unittest.skipIf(TF_216, "Optimizer not implemented")
     def test_lamb_optimizer_ema(self):
         self.run_for_optimizer(LAMBOptimizer(), ema=True)
-    
+
     @unittest.skipIf(not TF_216, "Optimizer not implemented")
     def test_lamb_optimizer(self):
         self.run_for_optimizer(LionOptimizer())
-    
+
     @unittest.skipIf(not TF_216, "Optimizer not implemented")
     def test_lamb_optimizer_ema(self):
         self.run_for_optimizer(LionOptimizer(), ema=True)
-

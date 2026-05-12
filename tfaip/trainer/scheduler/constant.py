@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the ConstantSchedule"""
+
 from tfaip.trainer.scheduler import Constant
 from tfaip.trainer.scheduler.learningrate import LearningRateSchedule
 

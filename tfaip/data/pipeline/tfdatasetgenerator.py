@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Implementation of TFDatasetGenerator"""
+
 import json
 from functools import partial
 from typing import Callable, Iterable, TYPE_CHECKING, TypeVar, Generic, Union, List

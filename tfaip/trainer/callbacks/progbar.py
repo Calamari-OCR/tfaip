@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the TFAIPProgbarLogger which extends the default keras ProgbarLogger"""
+
 import time
 
 from tensorflow.keras.callbacks import ProgbarLogger

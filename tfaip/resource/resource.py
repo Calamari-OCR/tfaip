@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of a Resource used in the ResourceManager"""
+
 from dataclasses import field
 from typing import Optional
 

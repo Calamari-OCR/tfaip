@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Implementation of the ModelBase"""
+
 import logging
 from abc import ABC, abstractmethod
 from typing import Type, Dict, Any, Tuple, Optional, List, TYPE_CHECKING, TypeVar, Generic

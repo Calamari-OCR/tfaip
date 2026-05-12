@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the DumpResultsCallback using in LAV"""
+
 from tfaip import DataGeneratorParams
 from tfaip.lav.callbacks.lav_callback import LAVCallback
 import pickle

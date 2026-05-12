@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the PredictorParams"""
+
 from dataclasses import dataclass, field
 
 from paiargparse import pai_meta, pai_dataclass

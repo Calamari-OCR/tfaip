@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of the parameters for a ListFileScenario"""
+
 from dataclasses import dataclass, field
 from typing import Optional, List
 

@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of a parallel mapping pipeline"""
+
 from abc import ABC, abstractmethod
 import multiprocessing
 from multiprocessing.pool import RUN

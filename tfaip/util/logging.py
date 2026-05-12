@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definitions for logging in tfaip"""
+
 import os
 import logging
 

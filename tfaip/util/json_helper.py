@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Utils for JSON-Encoding/Decoding"""
+
 import importlib
 import json
 from dataclasses import is_dataclass

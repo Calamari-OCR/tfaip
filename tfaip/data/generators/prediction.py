@@ -16,6 +16,7 @@
 # tfaip. If not, see http://www.gnu.org/licenses/.
 # ==============================================================================
 """Definition of a DataGenerator that generates data based on the prediction of a model"""
+
 import logging
 import threading
 from dataclasses import field, dataclass
