@@ -165,7 +165,7 @@ class TestDataPipeline(unittest.TestCase):
         l = data.create_pipeline(
             DataPipelineParams(mode=PipelineMode.TRAINING), SimpleDataGeneratorParams(numbers_to_generate=numbers)
         ).preload_input_samples()
-        out_numbers = [int(s.inputs) for s in l]
+        out_numbers = [int(s.inputs.squeeze()) for s in l]
         self.assertListEqual(out_numbers, sum([[i + x * 7 for x in range(10)] for i in numbers], []))
 
     def test_data_generator(self):

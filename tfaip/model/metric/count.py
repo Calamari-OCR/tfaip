@@ -23,7 +23,7 @@ class Count(tf.keras.metrics.Metric):
 
     def __init__(self, name="count", dtype=tf.int64, **kwargs):
         super().__init__(dtype=dtype, name=name, **kwargs)
-        self.count = self.add_variable(shape=(), name=name, initializer="zeros")
+        self.count = self.add_weight(shape=(), name=name, initializer="zeros")
 
     def update_state(self, y_true, y_pred, sample_weight=None):
         first_tensor = tf.nest.flatten(y_true)[0]
