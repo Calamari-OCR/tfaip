@@ -49,14 +49,15 @@ class SharedMemoryNumpyArray(NamedTuple):
 
 def numpy_to_shared_memory(data: np.ndarray) -> SharedMemoryNumpyArray:
     shared_memory = multiprocessing.shared_memory.SharedMemory(create=True, size=data.nbytes)
-    shared_memory.buf[:] = data.tobytes()
+    dst = np.ndarray(shape=data.shape, dtype=data.dtype, buffer=shared_memory.buf)
+    dst[:] = data[:]
     shared_memory.close()
     return SharedMemoryNumpyArray(shared_memory.name, data.shape, data.dtype)
 
 
 def numpy_from_shared_memory(data: SharedMemoryNumpyArray, unlink=True) -> np.ndarray:
     mem = multiprocessing.shared_memory.SharedMemory(create=False, name=data.name)
-    data = np.frombuffer(mem.buf, dtype=data.dtype).reshape(data.shape).copy()
+    data = np.ndarray(data.shape, dtype=data.dtype, buffer=mem.buf).copy()
     mem.close()
     if unlink:
         mem.unlink()
