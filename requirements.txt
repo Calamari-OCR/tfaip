@@ -13,6 +13,7 @@ levenshtein
 scikit-image
 pooch
 tf_keras
+tensorboard
 #tensorflow>=2.4.0 # ,<2.16.0
 #tensorflow_addons>=0.12.0  # must be compatible with tensorflow version
 tqdm
