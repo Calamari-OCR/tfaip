@@ -28,6 +28,7 @@ from tensorflow.python.keras.engine import data_adapter
 from tfaip import ModelBaseParams
 from tfaip.model.layerbase import LayerBase
 from tfaip.model.modelbase import ModelBase
+from tfaip.model.inputlayers import TrainingInputLayer, PredictInputLayer
 from tfaip.model.print_evaluate_layer import PrintEvaluateLayer, PrintEvaluateLayerInput
 
 if TYPE_CHECKING:
@@ -269,13 +270,11 @@ class RootGraph(tf.keras.layers.Layer):
 
     def train(self, inputs, targets):
         """Wrapper for the actual `call` to indicate training."""
-        wrap = tf.keras.layers.Lambda(lambda x: {"training": x})
-        return self(wrap((inputs, targets)))
+        return self(TrainingInputLayer()((inputs, targets)))
 
     def predict(self, inputs):
         """Wrapper for the actual `call` to indicate training."""
-        wrap = tf.keras.layers.Lambda(lambda x: {"predict": x})
-        return self(wrap(inputs))
+        return self(PredictInputLayer()(inputs))
 
     def pre_proc_targets(self, inputs, targets):
         """Additional function to be called to pre-process the targets within the model.
@@ -323,13 +322,11 @@ class GenericGraphBase(LayerBase[TMP], ABC):
 
     def train(self, inputs, targets):
         """Wrapper for the actual `call` to indicate training."""
-        wrap = tf.keras.layers.Lambda(lambda x: {"training": x})
-        return self(wrap((inputs, targets)))
+        return self(TrainingInputLayer()((inputs, targets)))
 
     def predict(self, inputs):
         """Wrapper for the actual `call` with indicated prediction."""
-        wrap = tf.keras.layers.Lambda(lambda x: {"predict": x})
-        return self(wrap(inputs))
+        return self(PredictInputLayer()(inputs))
 
     @abstractmethod
     def build_train_graph(self, inputs, targets=None, training=None):

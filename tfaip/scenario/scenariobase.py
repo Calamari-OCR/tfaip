@@ -474,8 +474,8 @@ class ScenarioBase(Generic[TScenarioParams, TTrainerPipelineParams], ABC, metacl
                 os.makedirs(os.path.dirname(path_serve), exist_ok=True)
                 export_graph.save(
                     path_serve,
-                    include_optimizer=False,
-                    options=tf.saved_model.SaveOptions(namespace_whitelist=["Addons"]),
+                    #include_optimizer=False,
+                    #options=tf.saved_model.SaveOptions(namespace_whitelist=["Addons"]),
                 )
 
         # Export the NetConfigBaseParams

@@ -106,7 +106,7 @@ class MultiModelPredictor(PredictorBase):
         if not models:
             model_paths = model_paths or [os.path.join(model, "serve") for model in paths]
             models = [
-                keras.models.load_model(model, compile=False, custom_objects=scenario.model_cls().all_custom_objects())
+                keras.models.load_model(model, compile=False, custom_objects=scenario.model_cls().all_custom_objects(), safe_mode=False)
                 for model in model_paths
             ]
         predictor.set_models(models, [scenario.data_cls()(s.data, **scenario.static_data_kwargs(s)) for s in scenarios])

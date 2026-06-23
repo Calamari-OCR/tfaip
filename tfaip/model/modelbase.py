@@ -29,6 +29,7 @@ from tfaip import Sample, EXPORT_TENSORFLOW_1
 from tfaip.data.data import DataBase
 from tfaip.model.metric.count import Count
 from tfaip.model.tensorboardwriter import TensorboardWriter
+from tfaip.model.inputlayers import TrainingInputLayer, PredictInputLayer
 from tfaip.util.tftyping import AnyTensor
 
 if TYPE_CHECKING:
@@ -63,6 +64,8 @@ class ModelBase(Generic[TMP], ABC):
         """Custom objects required to instantiate saved keras models even in graph mode"""
         return {
             "TensorboardWriter": TensorboardWriter,
+            "TrainingInputLayer": TrainingInputLayer,
+            "PredictInputLayer": PredictInputLayer
         }
 
     def __init__(self, params: TMP, **kwargs):

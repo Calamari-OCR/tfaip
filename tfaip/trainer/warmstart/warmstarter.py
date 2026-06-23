@@ -114,7 +114,7 @@ class WarmStarter(Generic[TWSP]):
         abs_model_path = os.path.abspath(os.path.expanduser(self._params.model))
         try:
             # 1. Load model
-            src_model = tf.keras.models.load_model(abs_model_path, compile=False, custom_objects=custom_objects)
+            src_model = tf.keras.models.load_model(abs_model_path, compile=False, custom_objects=custom_objects, safe_mode=False)
         except OSError:
             # 2. load as checkpoint, then go to 5.
             logger.debug(f"Could not load '{abs_model_path}' as saved model. Attempting to load as a checkpoint.")
